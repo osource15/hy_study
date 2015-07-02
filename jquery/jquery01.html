@@ -1,0 +1,147 @@
+<html>
+	<head>
+	<script src="http://auto.qq.com/00s/0/test/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" >
+	//北京车市最新报价跨域
+	document.domain = 'qq.com';
+</script>
+<script src="http://auto.qq.com/00s/0/test/auto.merge.v1.0.js"></script>
+<script type="text/javascript">
+	/*cur可以不写，默认为0*/
+	/*已经上市*/
+	var yss_tab = new Tab({
+		menus: $("#listed .ym_menu a"),
+		cons: $("#listed .bd ul"),
+		cur:5
+	});
+
+	/*即将上市*/
+	/*var jss_tab = new Tab({
+		menus: $("#soon .ym_menu a"),
+		cons: $("#soon .bd ul")
+	});*/
+</script>	
+<script src="http://js.data.auto.qq.com/car_public/lowprice_46.js"></script><!--热门降价-->
+<script src="http://js.data.auto.qq.com/car_public/lowprice_51.js"></script><!--热门降价-->
+<!--热门降价脚本-->
+<script>
+(function($){
+$('#msts').html("asdfsad");
+alert($('#msts'));
+	/* 车市最新报价列表抓取 */
+	function createPostContainer(_url,func,container,errFunc){
+		var self      = this;
+		var oArea     = (container && container.length) ? container : $(document.body);
+		var oFrame    = $('#_messagepost').size() ? $('#_messagepost') : $('<iframe id="_messagepost" name="_messagepost" style="display:none"></iframe>').appendTo(oArea);
+		oFrame.unbind().bind('load',function(result){
+			try{
+				if(this.contentWindow.data){
+					var oData = this.contentWindow.data;
+					if(oData && oData.ret == 0){
+						typeof func === 'function' && func(oData);
+					}else{
+						if(typeof errFunc === 'function'){
+							return errFunc(oData);
+						}
+					}
+				}
+				oFrame.remove();
+			}catch(err){
+				//alert(err);
+			}
+		});
+		var _form     = $('#_messageform');
+			(_form && _form.size()) ?(function(){
+				_form.attr('action',_url);
+				_form.get(0).reset();
+			})() : _form = $('<form action="'+ _url +'" method="post" target="_messagepost" id="_messageform" style="display:none;"></form>').appendTo(oArea);
+		return _form;
+	}
+	var _form   = createPostContainer('http://wecar.qq.com/api/recomm/index?num=7&site=dwhome&provinceid=51',function(_data){ //请各地根据自己当地对应的城市id修改provinceid的值
+			var priceCon = $(".priceCon");
+			var priceConArr = ["8\u4E07\u4EE5\u5185","8-12\u4E07","12-18\u4E07","18-25\u4E07","25-45\u4E07","45\u4E07\u4EE5\u4E0A"]
+			for(var i=0; i<6; i++){//6个表格
+				var priceConTable = $('<table summary="'+ priceConArr[i] +'">');
+				if(i<5){//前5个表格
+					for(var j=0; j<6; j++){//每个表格6行
+						var priceConTr = $('<tr>');
+						var priceConTh = $('<th><a href="' + _data.data[i][j].model_url + '" target="_blank">' + _data.data[i][j].serial_name + '</a></th>');
+						var priceConTd1 = $('<td autobussboss="model|local_price|2|2586"><a href="' + _data.data[i][j].model_url + '" target="_blank">' + _data.data[i][j].model_name + '</a></td>');
+						var priceConTd2 = $('<td class="r" autobussboss="price|local_price|2|2586"><strong><a href="' + _data.data[i][j].model_url + '" target="_blank">' + _data.data[i][j].shop_price + '\u4E07</a></strong></td>');
+						var priceConTd3 = $('<td class="r2"><span>' + _data.data[i][j].guide_price + '\u4E07</span></td>');
+						var priceConTd4 = $('<td><a class="co" href="' + _data.data[i][j].dealer_url + '" target="_blank">' + _data.data[i][j].dealer_name + '</a></td>');
+						var priceConTd5 = $('<td class="r"><a href="' + _data.data[i][j].model_url + '" class="ask" target="_blank">\u8BE2\u4EF7</a><a class="drive" href="' + _data.data[i][j].model_url + '#drive" target="_blank">\u8BD5\u9A7E</a></td>');
+						priceConTr.append(priceConTh);
+						priceConTr.append(priceConTd1);
+						priceConTr.append(priceConTd2);
+						priceConTr.append(priceConTd3);
+						priceConTr.append(priceConTd4);
+						priceConTr.append(priceConTd5);
+						priceConTable.append(priceConTr);
+					}
+					priceCon.append(priceConTable);
+				}else if(i == 5){//第6个表格
+					for(var j=0; j<5; j++){//前五行
+						var priceConTr = $('<tr>');
+						var priceConTh = $('<th><a href="' + _data.data[i][j].model_url + '" target="_blank">' + _data.data[i][j].serial_name + '</a></th>');
+						var priceConTd1 = $('<td autobussboss="model|local_price|2|2586"><a href="' + _data.data[i][j].model_url + '" target="_blank">' + _data.data[i][j].model_name + '</a></td>');
+						var priceConTd2 = $('<td class="r" autobussboss="price|local_price|2|2586"><strong><a href="' + _data.data[i][j].model_url + '" target="_blank">' + _data.data[i][j].shop_price + '\u4E07</a></strong></td>');
+						var priceConTd3 = $('<td class="r2"><span>' + _data.data[i][j].guide_price + '\u4E07</span></td>');
+						var priceConTd4 = $('<td><a class="co" href="' + _data.data[i][j].dealer_url + '" target="_blank">' + _data.data[i][j].dealer_name + '</a></td>');
+						var priceConTd5 = $('<td class="r"><a href="' + _data.data[i][j].model_url + '" class="ask" target="_blank">\u8BE2\u4EF7</a><a class="drive" href="' + _data.data[i][j].model_url + '#drive" target="_blank">\u8BD5\u9A7E</a></td>');
+						priceConTr.append(priceConTh);
+						priceConTr.append(priceConTd1);
+						priceConTr.append(priceConTd2);
+						priceConTr.append(priceConTd3);
+						priceConTr.append(priceConTd4);
+						priceConTr.append(priceConTd5);
+						priceConTable.append(priceConTr);
+					}
+					var lastTable6Tr6 = _data.data[6].length - 1;
+					//console.log(lastTable6Tr6);
+					var priceConTr = $('<tr>');
+					var priceConTh = $('<th><a href="' + _data.data[6][lastTable6Tr6].model_url + '" target="_blank">' + _data.data[6][lastTable6Tr6].serial_name + '</a></th>');
+					var priceConTd1 = $('<td autobussboss="model|local_price|2|2586"><a href="' + _data.data[6][lastTable6Tr6].model_url + '" target="_blank">' + _data.data[6][lastTable6Tr6].model_name + '</a></td>');
+					var priceConTd2 = $('<td class="r" autobussboss="price|local_price|2|2586"><strong><a href="' + _data.data[6][lastTable6Tr6].model_url + '" target="_blank">' + _data.data[6][lastTable6Tr6].shop_price + '\u4E07</a></strong></td>');
+					var priceConTd3 = $('<td class="r2"><span>' + _data.data[6][lastTable6Tr6].guide_price + '\u4E07</span></td>');
+					var priceConTd4 = $('<td><a class="co" href="' + _data.data[6][lastTable6Tr6].dealer_url + '" target="_blank">' + _data.data[6][lastTable6Tr6].dealer_name + '</a></td>');
+					var priceConTd5 = $('<td class="r"><a href="' + _data.data[6][lastTable6Tr6].model_url + '" class="ask" target="_blank">\u8BE2\u4EF7</a><a class="drive" href="' + _data.data[6][lastTable6Tr6].model_url + '#drive" target="_blank">\u8BD5\u9A7E</a></td>');
+					priceConTr.append(priceConTh);
+					priceConTr.append(priceConTd1);
+					priceConTr.append(priceConTd2);
+					priceConTr.append(priceConTd3);
+					priceConTr.append(priceConTd4);
+					priceConTr.append(priceConTd5);
+					priceConTable.append(priceConTr);
+
+					priceCon.append(priceConTable);
+				}
+
+				/* 北京车市最新报价隔行换色 */
+				$(".priceCon tr:nth-child(odd)").addClass("altRow");
+				//$(".priceCon tr:nth-child(4n+2)").addClass("altRow");
+				$(".priceCon tr").hover(
+					function(){$(this).addClass("hover");},
+					function(){$(this).removeClass("hover");}
+				);
+
+				/* 北京车市最新报价页卡切换 */
+				var price_tab = new Tab({
+					menus: $(".priceTab li"),
+					cons: $(".priceCon table")
+				});
+			}
+		}
+	);
+	_form.submit();
+
+})(window.jQuery);
+</script>
+	</head>
+	
+	<body>
+		<div id="msts">asdfdsaf</div>
+	</body>	
+</html>	
+
+

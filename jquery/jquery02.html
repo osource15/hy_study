@@ -1,0 +1,35 @@
+<html>
+<head>
+<script src="http://auto.qq.com/00s/0/test/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+/*$(document).ready(function(){//文档加载的时候开始加载，这是为了防止文档在完全加载（就绪）之前运行 jQuery 代码。于$(function(){...});等同。
+	alert($("p").html());
+});*/
+
+
+/*var fun = function(params){//等同于(function($){...})(jQuery)；这个函数，是立即执行匿名函数fun，这里参数是jQuery。这个写法主要目的是保证jQuery不与其他类库或变量有冲突，(function($){....})(jQuery);在定义后就立刻执行, 在执行顺序上可能要先于$(function(){})；其他的没啥区别 。
+	alert(32424432);
+};
+fun(jQuery); */
+
+
+(function($){
+	$('p').click(function(){
+		$(this).hide();
+	});
+	$("button").click(function(){
+    $("p").hide();
+  });
+})(jQuery);
+</script>
+</head>
+
+<body>
+<p>If you click on me, I will disappear.</p>
+<h2>This is a heading</h2>
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
+<button>Click me</button>
+</body>
+
+</html> 

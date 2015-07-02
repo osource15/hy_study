@@ -1,0 +1,51 @@
+<html>
+<body>
+<script type="text/javascript">
+//xpath 是在XML查找节点的方法  dom是用xpath来查找节点，主要是用来实现的行为
+function loadXMLDoc(dname)
+{
+if (window.XMLHttpRequest)
+  {
+  xhttp=new XMLHttpRequest();
+  }
+else
+  {
+  xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xhttp.open("GET",dname,false);
+xhttp.send("");
+return xhttp.responseXML;
+}
+
+xml=loadXMLDoc("books.xml");
+//path="/bookstore/book[1]/title";
+//path="/bookstore/book/price/text()";
+path = "/bookstore/book[price>35]/price/text()";
+//code for IE
+if (window.ActiveXObject)
+{
+var nodes=xml.selectNodes(path);
+
+for (i=0;i<nodes.length;i++)
+  {
+  document.write(nodes[i].nodeValue);//childNodes[0].
+  document.write("<br />");
+  }
+}
+//code for Mozilla, Firefox, Opera, etc.
+else if (document.implementation && document.implementation.createDocument)
+{
+var nodes=xml.evaluate(path, xml, null, XPathResult.ANY_TYPE,null);
+var result=nodes.iterateNext();
+
+while (result)
+  {
+  document.write(result.nodeValue + "<br />");
+  result=nodes.iterateNext();
+  }
+}
+</script>
+</body>
+</html>
+
+
