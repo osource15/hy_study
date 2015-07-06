@@ -1,0 +1,8 @@
+处理器	英特尔 第三代酷睿 i3-3220 @ 3.30GHz 双核
+主板	技嘉 B75M-HD3 ( 英特尔 Ivy Bridge - B75 Express 芯片组 )
+内存	8 GB ( 宇瞻 DDR3 1600MHz )
+主硬盘	西数 WDC WD5000AAKX-00ERMA0 ( 500 GB / 7200 转/分 )
+显卡	Nvidia GeForce GT 630 ( 4 GB / 七彩虹 )
+显示器	冠捷 AOC1960 1960 ( 19.1 英寸 )
+声卡	瑞昱 ALC887 @ 英特尔 Panther Point High Definition Audio Controller
+网卡	瑞昱 RTL8168/8111/8112 Gigabit Ethernet Controller / 技嘉
