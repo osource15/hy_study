@@ -25,12 +25,34 @@
 		
 		//var arr = ["a","b","c"];
 		
-		var arr = {
+/* 		var arr = {
 				a:"1",
 				b:"b",
 				c:"c"
 				};
-		alert(arr.a);
+		alert(arr.a); */
+
+		
+		
+		window.onload=function(){
+			alert(34324);
+		}
+		
+		window.onload=function(){
+			function myfunction(){
+				var x;
+				var txt="";
+				person ={a:"1",b:"2",c:3};
+				for(x in person){
+					txt = txt+person[x];
+				}
+				document.getElementById('test').innerHTML = txt;	
+			}
+			myfunction(); 
+		};		
+		
 	</script>
+	
+	<div id = "test">abcd</div>
 </body>
 </html>

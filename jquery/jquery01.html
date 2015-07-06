@@ -9,11 +9,11 @@
 <script type="text/javascript">
 	/*cur可以不写，默认为0*/
 	/*已经上市*/
-	var yss_tab = new Tab({
+	/*var yss_tab = new Tab({
 		menus: $("#listed .ym_menu a"),
 		cons: $("#listed .bd ul"),
 		cur:5
-	});
+	});*/
 
 	/*即将上市*/
 	/*var jss_tab = new Tab({
@@ -23,11 +23,27 @@
 </script>	
 <script src="http://js.data.auto.qq.com/car_public/lowprice_46.js"></script><!--热门降价-->
 <script src="http://js.data.auto.qq.com/car_public/lowprice_51.js"></script><!--热门降价-->
+
+<script>
+/* (function($){
+	lowpricelist = lowprice_list[0];
+	//alert(lowpricelist.sid);
+	
+
+    txt='{"employees": ['+
+	'{ "firstName":"Bill" , "lastName":"Gates" },'+
+	'{ "firstName":"George" , "lastName":"Bush" },'+
+	'{ "firstName":"Thomas" , "lastName":"Carter" }'+
+']}';
+	
+	var obj = eval("("+txt+")");
+	alert(obj.employees[0].firstName);
+	
+})(jQuery); */
+</script>
 <!--热门降价脚本-->
 <script>
 (function($){
-$('#msts').html("asdfsad");
-alert($('#msts'));
 	/* 车市最新报价列表抓取 */
 	function createPostContainer(_url,func,container,errFunc){
 		var self      = this;
@@ -142,6 +158,6 @@ alert($('#msts'));
 	<body>
 		<div id="msts">asdfdsaf</div>
 	</body>	
-</html>	
+</html>	-->
 
 

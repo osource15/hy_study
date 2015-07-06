@@ -10,7 +10,7 @@ if (window.XMLHttpRequest)
   }
 else
   {
-  xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  	xhttp=new ActiveXObject("Microsoft.XMLHTTP");
   }
 xhttp.open("GET",dname,false);
 xhttp.send("");
@@ -40,8 +40,8 @@ var result=nodes.iterateNext();
 
 while (result)
   {
-  document.write(result.nodeValue + "<br />");
-  result=nodes.iterateNext();
+	  document.write(result.nodeValue + "<br />");
+	  result=nodes.iterateNext();
   }
 }
 </script>
